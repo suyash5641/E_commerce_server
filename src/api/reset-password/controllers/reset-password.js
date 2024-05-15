@@ -29,6 +29,9 @@ module.exports = {
       const user = await strapi.query('plugin::users-permissions.user').findOne({
         where: { email: identifier },
       });
+      if (user === null)
+        throw Error("Enter registered email id")
+      console.log(user, "test")
       await strapi.entityService.update('plugin::users-permissions.user', user.id, {
         data: { resetPasswordToken: null, password: params.newPassword },
         populate: ['role'],
