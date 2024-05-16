@@ -18,11 +18,10 @@ module.exports = {
       const user = await strapi.query('plugin::users-permissions.user').findOne({
         where: { email: email },
       });
-      // if (user === null)
-      //   throw Error("Enter registered email id")
+      if (user === null)
+        ctx.throw(404, "Enter registered email id")
 
       const client = new MailtrapClient({ token: TOKEN });
-
       const sender = {
         email: "mailtrap@noreplyshop.site",
         name: "Mailtrap Test",
@@ -32,6 +31,25 @@ module.exports = {
           email: email,
         }
       ];
+
+      const userLog = await strapi.entityService.findOne('api::user-log.user-log', user?.id);
+      if (userLog === null) {
+        await strapi.entityService.create('api::user-log.user-log', {
+          data: {
+            resendPasswordOtp: sixDigitOTP,
+            userName: email,
+            id: user?.id
+          },
+        });
+      }
+      else {
+        await strapi.entityService.update('api::user-log.user-log', userLog?.id, {
+          data: {
+            resendPasswordOtp: sixDigitOTP
+          },
+        });
+      }
+
       await client
         .send({
           from: sender,

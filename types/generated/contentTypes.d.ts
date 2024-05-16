@@ -785,6 +785,39 @@ export interface ApiProductProduct extends Schema.CollectionType {
   };
 }
 
+export interface ApiUserLogUserLog extends Schema.CollectionType {
+  collectionName: 'user_logs';
+  info: {
+    singularName: 'user-log';
+    pluralName: 'user-logs';
+    displayName: 'UserLog';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    userName: Attribute.Text;
+    resendPasswordOtp: Attribute.BigInteger;
+    userId: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::user-log.user-log',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::user-log.user-log',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -804,6 +837,7 @@ declare module '@strapi/types' {
       'api::brand.brand': ApiBrandBrand;
       'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
+      'api::user-log.user-log': ApiUserLogUserLog;
     }
   }
 }

@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_logs",
+  "info": {
+    "singularName": "user-log",
+    "pluralName": "user-logs",
+    "displayName": "UserLog",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "userName": {
+      "type": "text"
+    },
+    "resendPasswordOtp": {
+      "type": "biginteger"
+    },
+    "userId": {
+      "type": "text"
+    }
+  }
+}
