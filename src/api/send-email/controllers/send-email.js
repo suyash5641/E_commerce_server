@@ -24,7 +24,7 @@ module.exports = {
       const client = new MailtrapClient({ token: TOKEN });
       const sender = {
         email: "mailtrap@noreplyshop.site",
-        name: "Mailtrap Test",
+        name: "Ecommerce_App",
       };
       const recipients = [
         {
@@ -32,6 +32,7 @@ module.exports = {
         }
       ];
 
+      const resetPasswordEmailText = `Dear ${user?.username} , We received a request to reset your password. Please use the following six-digit code to proceed with resetting your password: ${sixDigitOTP}`
       const userLog = await strapi.entityService.findOne('api::user-log.user-log', user?.id);
       if (userLog === null) {
         await strapi.entityService.create('api::user-log.user-log', {
@@ -54,8 +55,8 @@ module.exports = {
         .send({
           from: sender,
           to: recipients,
-          subject: "You are awesome!",
-          text: `Your  six digit reset password  otp is ${sixDigitOTP}`,
+          subject: "Reset Account Password",
+          text: resetPasswordEmailText,
           category: "Integration Test",
         })
         .then(console.log, console.error);
