@@ -17,7 +17,6 @@ module.exports = {
       if (user === null)
         ctx.throw(404, "Enter registered email id")
       const userLog = await strapi.entityService.findOne('api::user-log.user-log', user?.id);
-      console.log("test", userLog?.resendPasswordOtp !== params?.resendPasswordOtp, userLog?.resendPasswordOtp, params?.resendPasswordOtp)
       if (userLog?.resendPasswordOtp !== params?.resendPasswordOtp)
         ctx.throw(401, 'Enter correct six digit otp')
       await strapi.entityService.update('plugin::users-permissions.user', user.id, {
