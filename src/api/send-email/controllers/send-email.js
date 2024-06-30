@@ -4,7 +4,7 @@ const TOKEN = process.env.MAILTRAP_API_TOKEN;
 const ENDPOINT = "https://send.api.mailtrap.io/";
 
 function generateOTP() {
-  // Generate a random 6-digit number
+  // Generate a random 6-digit  number
   const otp = Math.floor(100000 + Math.random() * 900000);
   return otp.toString();
 }
