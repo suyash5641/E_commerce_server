@@ -1,7 +1,6 @@
 'use strict';
 const { MailtrapClient } = require("mailtrap");
 const TOKEN = process.env.MAILTRAP_API_TOKEN;
-const ENDPOINT = "https://send.api.mailtrap.io/";
 
 function generateOTP() {
   // Generate a random 6-digit  number
