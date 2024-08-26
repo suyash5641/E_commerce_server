@@ -3,7 +3,7 @@ const { MailtrapClient } = require("mailtrap");
 const TOKEN = process.env.MAILTRAP_API_TOKEN;
 
 function generateOTP() {
-  // Generate a random 6-digit  number
+  // Generate a random 6-digit number for otp
   const otp = Math.floor(100000 + Math.random() * 900000);
   return otp.toString();
 }
