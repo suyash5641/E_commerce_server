@@ -10,7 +10,6 @@ module.exports = {
 
       const params = ctx.request.body;
       const identifier = params.identifier
-
       const user = await strapi.query('plugin::users-permissions.user').findOne({
         where: { email: identifier },
       });
